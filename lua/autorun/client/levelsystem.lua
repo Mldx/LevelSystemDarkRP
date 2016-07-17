@@ -20,8 +20,6 @@ net.Receive( "xp", function()
 	level = net.ReadInt(32)
 	xp = net.ReadInt(32)
 	xpneeded = net.ReadInt(32)
-	if xp%100
-	print("level: " .. level .. "   xp: " .. xp .. "   xpneeded: " .. xpneeded)
 	if Round((xp / xpneeded)*200,1) < 8 then
 		returnxp = 8
 	else
