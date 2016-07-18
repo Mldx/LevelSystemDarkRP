@@ -25,6 +25,8 @@ local function sql_getvalues (pl)
 	pl:SetNWInt("level", sql.QueryValue("SELECT level FROM players_levelsystem WHERE steamid = '"..steamID.."'"))
 	pl:SetNWInt("xp", sql.QueryValue("SELECT xp FROM players_levelsystem WHERE steamid = '"..steamID.."'"))
 	pl:SetNWInt("xpneeded", sql.QueryValue("SELECT xpneeded FROM players_levelsystem WHERE steamid = '"..steamID.."'"))
+	MsgC( Color( 0, 255, 0 ), "Level System (sql_getvalues): ")
+	print("Level = " ..pl:GetNWInt("level").. "   Xp = " ..pl:GetNWInt("xp").. "   Xpneeded = "..pl:GetNWInt("xpneeded"))
 end
 
 local function new_player(pl)
@@ -52,10 +54,12 @@ end
 --end
 
 local function savelevel(pl)
-	unique_id = pl:GetNWString("SteamID")
+	unique_id = pl:SteamID()
 	level = pl:GetNWInt("level")
 	xp = pl:GetNWInt("xp")
 	xpneeded = pl:GetNWInt("xpneeded")
+	MsgC( Color( 0, 255, 0 ), "Level System (savelevel): ")
+	print("steamid = "..unique_id.."   level = "..level.."   xp = "..xp.."   xpneeded = "..xpneeded)
 	sql.Query("UPDATE players_levelsystem SET level = "..level..", xp = "..xp..", xpneeded = "..xpneeded.." WHERE steamid = '"..unique_id.."'")
 end
 
